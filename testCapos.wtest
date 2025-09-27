@@ -1,1 +1,39 @@
-r
+import artefactos.*
+import capos.*
+import castillo.*
+
+test "mochila llena"{
+
+    assert.notThat(mochila.hayLugar())
+}
+
+test "agregar artefacto a la mochila"{
+    rolando.recolectarArtefacto("Espada del destino")
+    rolando.recolectarArtefacto("Collar divino")
+    assert.notThat(mochila.hayLugar())
+}
+
+test "guardar armas en castillo" {
+    rolando.artefactosEncontrados("Espada del destino")
+    rolando.artefactosEncontrados("Collar divino")
+    rolando.guardarArtefactoCastillo()
+    rolando.artefactosEncontrados("libro de hechizos")
+    rolando.guardarArtefactoCastillo()
+    assert.equals(3, castillo.armasGuardadas().size())
+    assert.equals(0, mochila.artefactosGuardados().size()) 
+    assert.that(castillo.armasGuardadas().contains("Espada del destino"))
+    assert.that(castillo.armasGuardadas().contains("Collar divino"))
+    assert.that(castillo.armasGuardadas().contains("libro de hechizos"))
+}
+
+test "Total armas guardadas"{
+    rolando.artefactosEncontrados("Espada del destino")
+    rolando.artefactosEncontrados("Collar divino")
+    rolando.guardarArtefactoCastillo()
+    rolando.artefactosEncontrados("libro de hechizos")
+    assert.equals(3, rolando.totalArtefactos().size())
+}
+
+test "Historia de artefactos"{
+    rolando.artefactosEncontrados("Espada del destino")
+}
